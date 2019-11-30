@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH -J chigor
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=24:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o chigor.raf.gz
+#SBATCH -e chigor.err
+
+# ensure consistent sort
+export LC_ALL=C
+
+# format of axt files for reference genome.
+chiraf="chimp.raf.gz"
+gorraf="gorilla.raf.gz"
+
+# Merge line by line, new allele frequency is the average of
+# those in the inputs.
+joinraf ${chiraf} ${gorraf} |
+
+# compress
+gzip -c

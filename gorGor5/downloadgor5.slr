@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH -J dlgor5
+#SBATCH --account=rogersa
+#SBATCH --partition=kingspeak
+#SBATCH --time=02:30:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o downloadg2.out # stdout
+#SBATCH -e downloadg2.err # stderr
+
+fmt="http://hgdownload.cse.ucsc.edu/goldenPath/hg19/vsGorGor5/axtNet/chr%s.hg19.gorGor5.net.axt.gz\n"
+seq 1 22 | xargs printf ${fmt} | xargs wget
+
+# download md5sumcheck file
+wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/vsGorGor5/md5sum.txt

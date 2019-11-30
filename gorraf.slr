@@ -1,0 +1,27 @@
+#!/bin/bash
+#SBATCH -J gorraf
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=24:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o gorilla.raf.gz
+#SBATCH -e gorraf.err
+
+# ensure consistent sort
+export LC_ALL=C
+
+# format of axt files for reference genome.
+fmt="gorGor5/chr%d.hg19.gorGor5.net.axt.gz\n"
+
+# concatenate axt files
+seq 22 | sort | xargs printf $fmt | xargs zcat |
+
+# make .raf.gz file	
+axt2raf.py | 
+
+# get rid of "chr"
+sed 's/^chr//' |
+
+# compress
+gzip -c

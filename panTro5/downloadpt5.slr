@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH -J dlpt5
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=02:30:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o downloadpt5.out # stdout
+#SBATCH -e downloadpt5.err # stderr
+#SBATCH --mail-type=FAIL,BEGIN,END
+#SBATCH --mail-user=alan.achenbach@utah.edu
+# download chromosomes
+fmt="http://hgdownload.cse.ucsc.edu/goldenPath/hg19/vsPanTro5/axtNet/chr%s.hg19.panTro5.net.axt.gz\n"
+seq 1 22 | xargs printf ${fmt} | xargs wget
+# download md5sumcheck file  
+wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/vsPanTro5/md5sum.txt
