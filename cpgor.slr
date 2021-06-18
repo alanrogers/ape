@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH -J cpgor
+#SBATCH --account=rogersa-kp
+#SBATCH --partition=rogersa-kp
+#SBATCH --time=24:00:00
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH -o cpgor.out
+#SBATCH -e cpgor.err
+
+for i in $(ls $HOME/group/achenbach/gor/chr*.hg19.gorGor5.net.axt); do
+    gzip -c $i > $(basename $i).gz;
+	done
