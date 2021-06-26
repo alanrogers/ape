@@ -23,5 +23,13 @@ axt2raf.py |
 # get rid of "chr"
 sed 's/^chr//' |
 
-# compress
+# Compress.
+#
+# Note that output goes to standard output. This is OK within slurm,
+# because the "#SBATCH -o" command at the top redirects that output
+# into a file. But if you run this from the shell, add
+#
+#     " > gorilla.raf.gz"
+#
+# to the end of the line below.
 gzip -c

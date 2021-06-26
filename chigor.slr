@@ -19,5 +19,13 @@ gorraf="gorilla.raf.gz"
 # those in the inputs.
 joinraf ${chiraf} ${gorraf} |
 
-# compress
+# Compress.
+#
+# Note that output goes to standard output. This is OK within slurm,
+# because the "#SBATCH -o" command at the top redirects that output
+# into a file. But if you run this from the shell, add
+#
+#     " > chigor.raf.gz"
+#
+# to the end of the line below.
 gzip -c
